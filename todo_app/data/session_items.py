@@ -68,4 +68,21 @@ def save_item(item):
 
     return item
 
+def delete_item (item):
+    """
+    Removed an item in the session
+
+    Args:
+        item: The item to remove.    
+    
+    
+    """
+    existing_items = get_items()
+    existing_items.remove(item)
+    remaining_items = existing_items
+
+    session['items'] = remaining_items 
+
+    return item    
+    
 

@@ -3,26 +3,27 @@
 
 {% block content %}
   <div class="jumbotron">
-    <h1 class="display-4 text-center">To Do Application</h1>
-    <p class="lead text-center">DevOps Engineering Tasks</p>
+    <h1 class="display-4 text-center">DevOps Engineering Tasks</h1>
+    <!--<p class="lead text-center">DevOps Engineering Tasks</p> -->
+    <br>
+    <br>
 
-    <h5>Create A New Task</h5>
+   <h5 class="text-center" >Create A New Task</h5> 
     <form method="post" action="/add_tasks">
       <div class="form-group">
-        <label for="title">Task:</label>
+     <label for="title">Task:</label>
         <input type="text" class="form-control" id="title" placeholder="Type A New Task" name="title">
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary"> Create A New Task</button>
     </form>
     <br>
-    
     <br>
 
 
-    <h5>Update Task Status</h5>
-    <form method="post" action="update_task">
-      <div class="form-group">
-        <label for="id">Task ID:</label>
+  <h5 class="text-center">Update Task Status</h5> 
+    <form method="post" action="update_task_status">
+      <div class="form-group ">
+     <label for="id">Task ID:</label>
         <input type="number" class="form-control" id="id" placeholder="Enter Task ID #" name="id">
       </div>
 
@@ -35,7 +36,19 @@
         <option>Deferred</option>
       </select>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Update Task Status</button>
+    </form>
+
+    <br>
+    <br>
+
+     <h5 class="text-center">Delete A Task</h5> 
+    <form method="post" action="delete_task">
+      <div class="form-group">
+        <label for="id">Task ID:</label>
+        <input type="number" class="form-control" id="id" placeholder="Enter Task ID #" name="id">
+      </div>
+      <button type="submit" class="btn btn-primary">Delete A Task </button>
     </form>
   </div>
 
@@ -54,7 +67,7 @@
           <td>{{item.id}}</td>
           <td>{{item.status}}</td>
           <td>{{item.title}}</td>
-          <td><a href="/books/{{item.id}}">View Details</a></td>
+          <!--<td><a href="/books/{{item.id}}">View Details</a></td> -->
           </tr>
           {%endfor%}
         </table>

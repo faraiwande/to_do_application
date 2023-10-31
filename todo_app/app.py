@@ -1,6 +1,6 @@
 from flask import Flask, request,render_template
 from todo_app.flask_config import Config
-from todo_app.data.session_items import get_items, add_item, get_item, save_item
+from todo_app.data.session_items import get_items, add_item, get_item, save_item, delete_item
 
 
 
@@ -21,10 +21,18 @@ def add_tasks():
         return render_template ('index.html', my_items = items)
         
     
-@app.route('/update_task', methods=['POST'])
+@app.route('/update_task_status', methods=['POST'])
 def update_task():
         item = get_item(dict(request.form.items())['id'])
         item.update({'status': dict(request.form.items())['status']})
         save_item(item)
+        items = get_items()
+        return render_template ('index.html', my_items = items)
+
+
+@app.route('/delete_task', methods=['POST'])
+def delete_task():
+        item = get_item(dict(request.form.items())['id'])
+        delete_item(item)
         items = get_items()
         return render_template ('index.html', my_items = items)
