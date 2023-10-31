@@ -3,19 +3,32 @@
 
 {% block content %}
   <div class="jumbotron">
-    <h1 class="display-4">To-Do App</h1>
-    <p class="lead">Just another to-do app.</p>
+    <h1 class="display-4 text-center">To Do Application</h1>
+    <p class="lead text-center">DevOps Engineering To Do List</p>
   </div>
 
   <div class="row">
     <div class="col-md-12">
-      <h2>Items</h2>
-      <ul class="list-group mb-4">
-        {% for item in my_items %}
-        <li>{{item.status}} - {{item.title}}</li>
-          
-        {%endfor%}
+      <h2 class ="text-center">List</h2>
+      <ul>
+        <table class="table table-hover text-centered" >
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Status</th>
+            <th scope="col">Title</th>
+          </tr>
+          <tr>
+          {% for item in my_items %}
+          <td>{{item.id}}</td>
+          <td>{{item.status}}</td>
+          <td>{{item.title}}</td>
+          </tr>
+          {%endfor%}
+        </table>
       </ul>
     </div>
+
+
+    
   </div>
 {% endblock %}
