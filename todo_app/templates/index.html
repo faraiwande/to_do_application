@@ -14,6 +14,26 @@
      <label for="title">Task:</label>
         <input type="text" class="form-control" id="title" placeholder="Type A New Task" name="title">
       </div>
+
+      <div class="form-group">
+        <label for="priority">Select Priority</label>
+        <select class="form-control" id="priority" name="priority">
+          <option>P1</option>
+          <option>P2</option>
+          <option>P3</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="status">Select Status</label>
+        <select class="form-control" id="status" name="status">
+          <option>In Progress</option>
+          <option>Not Started</option>
+          <option>Completed</option>
+          <option>Deferred</option>
+        </select>
+      </div>
+
       <button type="submit" class="btn btn-primary"> Create A New Task</button>
     </form>
     <br>
@@ -61,13 +81,15 @@
             <th scope="col">#</th>
             <th scope="col">Status</th>
             <th scope="col">Title</th>
+            <th scope="col">Priority</th>
           </tr>
           <tr>
           {% for item in my_items %}
           <td>{{item.id}}</td>
           <td>{{item.status}}</td>
           <td>{{item.title}}</td>
-          <!--<td><a href="/books/{{item.id}}">View Details</a></td> -->
+          <td>{{item.priority}}</td>
+          <!--<td><a href="/delete_task/{{item.id}}">View Details</a></td> -->
           </tr>
           {%endfor%}
         </table>
