@@ -11,7 +11,7 @@ def get_items():
     Fetches all saved items from the session.
 
     Returns:
-        list: The list of saved items.
+        list: The list of saved items.000
     """
     return session.get('items', _DEFAULT_ITEMS.copy())
 
@@ -67,3 +67,5 @@ def save_item(item):
     session['items'] = updated_items
 
     return item
+
+

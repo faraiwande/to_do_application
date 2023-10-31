@@ -1,12 +1,12 @@
-from flask import Flask, request,render_template,  url_for 
+from flask import Flask, request,render_template
 from todo_app.flask_config import Config
-from todo_app.data.session_items import get_items, add_item
+from todo_app.data.session_items import get_items, add_item, get_item, save_item
+
+
 
 app = Flask(__name__)
 app.config.from_object(Config())
-
-
-     
+  
 
 @app.route('/', methods=['GET','POST'] )
 def index():
@@ -21,5 +21,10 @@ def add_tasks():
         return render_template ('index.html', my_items = items)
         
     
-
-
+@app.route('/update_task', methods=['POST'])
+def update_task():
+        item = get_item(dict(request.form.items())['id'])
+        item.update({'status': dict(request.form.items())['status']})
+        save_item(item)
+        items = get_items()
+        return render_template ('index.html', my_items = items)

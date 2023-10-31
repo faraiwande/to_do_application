@@ -6,23 +6,36 @@
     <h1 class="display-4 text-center">To Do Application</h1>
     <p class="lead text-center">DevOps Engineering Tasks</p>
 
-
+    <h5>Create A New Task</h5>
     <form method="post" action="/add_tasks">
       <div class="form-group">
-        <label for="title">New Task:</label>
+        <label for="title">Task:</label>
         <input type="text" class="form-control" id="title" placeholder="Type A New Task" name="title">
       </div>
-      <div class="form-group">
-        <label for="status">Select Status</label>
-        <select class="form-control" id="status" name="status">
-          <option>In Progress</option>
-          <option>Not Started</option>
-          <option>Completed</option>
-          <option>Deferred</option>
-        </select>
-      </div>
-      
       <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <br>
+    
+    <br>
+
+
+    <h5>Update Task Status</h5>
+    <form method="post" action="update_task">
+      <div class="form-group">
+        <label for="id">Task ID:</label>
+        <input type="number" class="form-control" id="id" placeholder="Enter Task ID #" name="id">
+      </div>
+
+    <div class="form-group">
+      <label for="status">Select Status</label>
+      <select class="form-control" id="status" name="status">
+        <option>In Progress</option>
+        <option>Not Started</option>
+        <option>Completed</option>
+        <option>Deferred</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
 
@@ -41,6 +54,7 @@
           <td>{{item.id}}</td>
           <td>{{item.status}}</td>
           <td>{{item.title}}</td>
+          <td><a href="/books/{{item.id}}">View Details</a></td>
           </tr>
           {%endfor%}
         </table>
