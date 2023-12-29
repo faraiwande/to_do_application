@@ -3,16 +3,100 @@
 
 {% block content %}
   <div class="jumbotron">
-    <h1 class="display-4">To-Do App</h1>
-    <p class="lead">Just another to-do app.</p>
+    <h1 class="display-4 text-center">DevOps Engineering Tasks</h1>
+    <!--<p class="lead text-center">DevOps Engineering Tasks</p> -->
+    <br>
+    <br>
+
+   <h5 class="text-center" >Create A New Task</h5> 
+    <form method="post" action="/add_tasks">
+      <div class="form-group">
+     <label for="title">Task:</label>
+        <input type="text" class="form-control" id="title" placeholder="Type A New Task" name="title">
+      </div>
+
+      <div class="form-group">
+        <label for="priority">Select Priority</label>
+        <select class="form-control" id="priority" name="priority">
+          <option>P1</option>
+          <option>P2</option>
+          <option>P3</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="status">Select Status</label>
+        <select class="form-control" id="status" name="status">
+          <option>In Progress</option>
+          <option>Not Started</option>
+          <option>Completed</option>
+          <option>Deferred</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary"> Create A New Task</button>
+    </form>
+    <br>
+    <br>
+
+
+  <h5 class="text-center">Update Task Status</h5> 
+    <form method="post" action="update_task_status">
+      <div class="form-group ">
+     <label for="id">Task ID:</label>
+        <input type="number" class="form-control" id="id" placeholder="Enter Task ID #" name="id">
+      </div>
+
+    <div class="form-group">
+      <label for="status">Select Status</label>
+      <select class="form-control" id="status" name="status">
+        <option>In Progress</option>
+        <option>Not Started</option>
+        <option>Completed</option>
+        <option>Deferred</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Task Status</button>
+    </form>
+
+    <br>
+    <br>
+
+     <h5 class="text-center">Delete A Task</h5> 
+    <form method="post" action="delete_task">
+      <div class="form-group">
+        <label for="id">Task ID:</label>
+        <input type="number" class="form-control" id="id" placeholder="Enter Task ID #" name="id" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Delete A Task </button>
+    </form>
   </div>
 
   <div class="row">
     <div class="col-md-12">
-      <h2>Items</h2>
-      <ul class="list-group mb-4">
-        <!-- List the todo items here -->
+      <h2 class ="text-center">Tasks</h2>
+      <ul>
+        <table class="table table-hover text-centered" >
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Status</th>
+            <th scope="col">Title</th>
+            <th scope="col">Priority</th>
+          </tr>
+          <tr>
+          {% for item in my_items %}
+          <td>{{item.id}}</td>
+          <td>{{item.status}}</td>
+          <td>{{item.title}}</td>
+          <td>{{item.priority}}</td>
+          <!--<td><a href="/delete_task/{{item.id}}">View Details</a></td> -->
+          </tr>
+          {%endfor%}
+        </table>
       </ul>
     </div>
+
+    
+ 
   </div>
 {% endblock %}
