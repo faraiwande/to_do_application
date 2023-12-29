@@ -16,7 +16,11 @@ def index():
 
 @app.route('/add_tasks', methods=['POST'])
 def add_tasks():
-        add_item(dict(request.form.items())['title'],dict(request.form.items())['priority'], dict(request.form.items())['status'])
+        add_item(
+                request.form['title'],
+                request.form['priority'],
+                request.form['status']
+        )
         items = get_items()
         return render_template ('index.html', my_items = items)
         
