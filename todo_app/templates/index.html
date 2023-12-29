@@ -59,18 +59,7 @@
     <button type="submit" class="btn btn-primary">Update Task Status</button>
     </form>
 
-    <br>
-    <br>
-
-     <h5 class="text-center">Delete A Task</h5> 
-    <form method="post" action="delete_task">
-      <div class="form-group">
-        <label for="id">Task ID:</label>
-        <input type="number" class="form-control" id="id" placeholder="Enter Task ID #" name="id" required>
-      </div>
-      <button type="submit" class="btn btn-primary">Delete A Task </button>
-    </form>
-  </div>
+   </div>
 
   <div class="row">
     <div class="col-md-12">
@@ -82,14 +71,25 @@
             <th scope="col">Status</th>
             <th scope="col">Title</th>
             <th scope="col">Priority</th>
+            <th scope="col"></th>
           </tr>
+
+          
           <tr>
           {% for item in my_items %}
           <td>{{item.id}}</td>
           <td>{{item.status}}</td>
           <td>{{item.title}}</td>
           <td>{{item.priority}}</td>
-          <!--<td><a href="/delete_task/{{item.id}}">View Details</a></td> -->
+          
+          <td>
+            <form method="post" action="delete_task">
+              <div class="form-group">
+                <input type="number" class="form-control" name="id" value="{{item.id}}" hidden />
+              </div>
+              <button type="submit" class="btn btn-primary">Delete This Task</button>
+            </form>
+          </td>
           </tr>
           {%endfor%}
         </table>
