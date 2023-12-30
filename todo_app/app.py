@@ -23,7 +23,6 @@ def index():
 #                 request.form['priority'],
 #                 request.form['status']
 #         )
-#         items = get_items()
 #         return redirect('/')
         
     
