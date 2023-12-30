@@ -1,4 +1,4 @@
-import requests,os
+import requests,os, json
 from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv())
@@ -40,12 +40,9 @@ def get_items():
                 id = card.get('id')
                 status = card.get('idList')
                 title = card.get('name')
-                try:
-                    priority = card.get('labels')[0].get('name')
-                except:
-                    priority = 'P3'
-                
-                items.append({'id': id, 'status': status, 'title' : title, 'priority':priority})
+                description = card.get('desc')
+                     
+                items.append({'id': id, 'status': status, 'title' : title, 'description':description})
     return items
                 
 def get_item(id):
@@ -61,3 +58,11 @@ def get_item(id):
     items = get_items()
     return next((item for item in items if item['id'] == id), None)
     
+def add_item(title,description,status):
+    for list in get_lists():
+        if list.get('name') == status:
+            url = 'https://api.trello.com/1/cards/?idList={}&key={}&token={}'.format(list.get('id'),key,token)
+            payload = {'name':title ,'desc' :description}
+            headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+            requests.post(url, data = json.dumps(payload), headers=headers)
+            

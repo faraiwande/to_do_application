@@ -1,7 +1,7 @@
 from flask import Flask, request,render_template, redirect
 from todo_app.flask_config import Config
-from todo_app.data.session_items import get_items, add_item, get_item, save_item, delete_item
-from todo_app.data.trello_items import get_items
+# from todo_app.data.session_items import get_items, add_item, get_item, save_item, delete_item
+from todo_app.data.trello_items import get_items, add_item
 
 
 
@@ -16,14 +16,14 @@ def index():
         return render_template ('index.html', my_items = items)
         
 
-# @app.route('/add_tasks', methods=['POST'])
-# def add_tasks():
-#         add_item(
-#                 request.form['title'],
-#                 request.form['priority'],
-#                 request.form['status']
-#         )
-#         return redirect('/')
+@app.route('/add_tasks', methods=['POST'])
+def add_tasks():
+        add_item(
+                request.form['title'],
+                request.form['description'],
+                request.form['status']
+        )
+        return redirect('/')
         
     
 # @app.route('/update_task_status', methods=['POST'])
