@@ -58,6 +58,7 @@ def get_item(id):
     items = get_items()
     return next((item for item in items if item['id'] == id), None)
     
+
 def add_item(title,description,status):
     for list in get_lists():
         if list.get('name') == status:
@@ -66,3 +67,11 @@ def add_item(title,description,status):
             headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
             requests.post(url, data = json.dumps(payload), headers=headers)
             
+
+
+
+def save_item(item):
+    for list in get_lists():
+        if list.get('name') == item.get('status'):
+            url = 'https://api.trello.com/1/cards/{}?idList={}&key={}&token={}'.format(item.get('id'),list.get('id'),key,token)
+            requests.put(url)

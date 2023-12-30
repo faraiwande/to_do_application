@@ -1,7 +1,6 @@
 from flask import Flask, request,render_template, redirect
 from todo_app.flask_config import Config
-# from todo_app.data.session_items import get_items, add_item, get_item, save_item, delete_item
-from todo_app.data.trello_items import get_items, add_item
+from todo_app.data.trello_items import get_items, add_item, save_item, get_item
 
 
 
@@ -26,12 +25,12 @@ def add_tasks():
         return redirect('/')
         
     
-# @app.route('/update_task_status', methods=['POST'])
-# def update_task():
-#         item = get_item(dict(request.form.items())['id'])
-#         item.update({'status': dict(request.form.items())['status']})
-#         save_item(item)
-#         return redirect('/')
+@app.route('/update_task_status', methods=['POST'])
+def update_task():
+        item = get_item(dict(request.form.items())['id'])
+        item.update({'status': dict(request.form.items())['status']})
+        save_item(item)
+        return redirect('/')
 
 
 # @app.route('/delete_task', methods=['POST'])
