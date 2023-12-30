@@ -68,10 +68,14 @@ def add_item(title,description,status):
             requests.post(url, data = json.dumps(payload), headers=headers)
             
 
-
-
+        
 def save_item(item):
     for list in get_lists():
         if list.get('name') == item.get('status'):
             url = 'https://api.trello.com/1/cards/{}?idList={}&key={}&token={}'.format(item.get('id'),list.get('id'),key,token)
             requests.put(url)
+
+
+def delete_item (item):
+    url = 'https://api.trello.com/1/cards/?{}&key={}&token={}'.format(item.get('id'),key,token)
+    requests.delete(url) 

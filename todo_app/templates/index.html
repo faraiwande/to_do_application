@@ -4,7 +4,7 @@
 {% block content %}
   <div class="jumbotron">
     <h1 class="display-4 text-center">DevOps Engineering Tasks</h1>
-    <!--<p class="lead text-center">DevOps Engineering Tasks</p> -->
+    
     <br>
     <br>
 
@@ -34,24 +34,7 @@
     <br>
 
 
-  <h5 class="text-center">Update Task Status</h5> 
-    <form method="post" action="update_task_status">
-      <div class="form-group ">
-     <label for="id">Task ID:</label>
-        <input type="text" class="form-control" id="id" placeholder="Enter Task ID #" name="id">
-      </div>
-
-    <div class="form-group">
-      <label for="status">Select Status</label>
-      <select class="form-control" id="status" name="status">
-        <option>To Do</option>
-        <option>Doing</option>
-        <option>Done</option>
-      </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Update Task Status</button>
-    </form>
-
+  
    </div>
 
   <div class="row">
@@ -60,26 +43,49 @@
       <ul>
         <table class="table table-hover text-centered" >
         <tr>
-            <th scope="col">#</th>
+            
             <th scope="col">Status</th>
             <th scope="col">Title</th>
             <th scope="col">Description</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
             <th scope="col"></th>
           </tr>
          
           <tr>
           {% for item in my_items %}
-          <td>{{item.id}}</td>
+          
           <td>{{item.status}}</td>
           <td>{{item.title}}</td>
           <td>{{item.description}}</td>
           
+          
           <td>
-            <form method="post" action="delete_task">
+            <form method="post" action="update_task_status">
               <div class="form-group">
-                <input type="number" class="form-control" name="id" value="{{item.id}}" hidden />
+                <input type="text" class="form-control" name="id" value="{{item.id}}" hidden />
+                <input type="text" class="form-control" name="status" value="Done" hidden />
               </div>
-              <button type="submit" class="btn btn-primary">Delete This Task</button>
+              <button type="submit" class="btn btn-primary btn-sm ">Done</button>
+            </form>
+          </td>
+          <td>
+            <form method="post" action="update_task_status">
+              <div class="form-group">
+                <input type="text" class="form-control" name="id" value="{{item.id}}" hidden />
+                <input type="text" class="form-control" name="status" value="To Do" hidden />
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm ">To Do</button>
+            </form>
+          </td>
+
+          <td>
+            <form method="post" action="update_task_status">
+              <div class="form-group">
+                <input type="text" class="form-control" name="id" value="{{item.id}}" hidden />
+                <input type="text" class="form-control" name="status" value="Doing" hidden />
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm ">Doing</button>
             </form>
           </td>
           </tr>
