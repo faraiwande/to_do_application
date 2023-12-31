@@ -7,6 +7,19 @@ key = os.getenv('TRELLO_API_KEY')
 token = os.getenv('TRELLO_API_TOKEN')
 
 
+
+class Item:
+    def __init__(self, id, name, status, desc):
+        self.id = id
+        self.name = name
+        self.status = status
+        self.desc = desc 
+
+    @classmethod
+    def from_trello_card(cls, card, lists):
+        list_name = next((list['name'] for list in lists if list['id'] == card['idList']), None)
+        return cls(card['id'], card['name'], list_name, card.get('desc', ''))
+
 def get_board_id():
     fields = 'fields=name'
     url = 'https://api.trello.com/1/members/me/boards?{}&key={}&token={}'.format(fields,key,token)
@@ -75,7 +88,8 @@ def save_item(item):
             url = 'https://api.trello.com/1/cards/{}?idList={}&key={}&token={}'.format(item.get('id'),list.get('id'),key,token)
             requests.put(url)
 
-
-def delete_item (item):
-    url = 'https://api.trello.com/1/cards/?{}&key={}&token={}'.format(item.get('id'),key,token)
-    requests.delete(url) 
+def get_cards():
+    board_id = get_board_id()
+    url = 'https://api.trello.com/1/boards/{}/cards?&key={}&token={}'.format(board_id,key, token)
+    response = requests.get(url)
+    return response.json()

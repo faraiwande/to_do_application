@@ -1,6 +1,6 @@
 from flask import Flask, request,render_template, redirect
 from todo_app.flask_config import Config
-from todo_app.data.trello_items import get_items, add_item, save_item, get_item, delete_item
+from todo_app.data.trello_items import add_item, save_item, get_item, Item, get_lists, get_cards
 
 app = Flask(__name__)
 app.config.from_object(Config())
@@ -8,7 +8,9 @@ app.config.from_object(Config())
 
 @app.route('/', methods=['GET','POST'] )
 def index():
-        items = get_items()
+        lists = get_lists()
+        cards = get_cards()
+        items = [Item.from_trello_card(card, lists) for card in cards]
         return render_template ('index.html', my_items = items)
         
 
@@ -27,11 +29,4 @@ def update_task():
         item = get_item(dict(request.form.items())['id'])
         item.update({'status': dict(request.form.items())['status']})
         save_item(item)
-        return redirect('/')
-
-
-@app.route('/delete_task', methods=['POST'])
-def delete_task():
-        item = get_item(dict(request.form.items())['id'])
-        delete_item(item)
         return redirect('/')
