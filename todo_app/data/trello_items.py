@@ -85,7 +85,7 @@ def add_item(title,description,status):
 def save_item(item):
     for list in get_lists():
         if list.get('name') == item.get('status'):
-            url = 'https://api.trello.com/1/cards/{}?idList={}&key={}&token={}'.format(item.get('id'),list.get('id'),key,token)
+            url = f'https://api.trello.com/1/cards/{item.get('id')}?idList={list.get('id')}&key={key}&token={token}'
             requests.put(url)
 
 def get_cards():
