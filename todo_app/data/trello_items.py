@@ -1,8 +1,4 @@
 import requests,os, json
-from dotenv import load_dotenv, find_dotenv
-
-load_dotenv(find_dotenv())
-
 key = os.getenv('TRELLO_API_KEY') 
 token = os.getenv('TRELLO_API_TOKEN')
 
@@ -85,8 +81,10 @@ def add_item(title,description,status):
 def save_item(item):
     for list in get_lists():
         if list.get('name') == item.get('status'):
-            url = f'https://api.trello.com/1/cards/{item.get('id')}?idList={list.get('id')}&key={key}&token={token}'
+            url = f"https://api.trello.com/1/cards/{item.get('id')}?idList={list.get('id')}&key={key}&token={token}"
             requests.put(url)
+
+ 
 
 def get_cards():
     board_id = get_board_id()
