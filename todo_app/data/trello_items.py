@@ -18,7 +18,7 @@ class Item:
 
 def get_board_id():
     fields = 'fields=name'
-    url = 'https://api.trello.com/1/members/me/boards?{}&key={}&token={}'.format(fields,key,token)
+    url = f"https://api.trello.com/1/members/me/boards?{fields}&key={key}&token={token}"
     reponse = requests.get(url)
     boards_json = reponse.json()
 
@@ -29,7 +29,7 @@ def get_board_id():
 
 def get_lists():
     fields = 'fields=name'
-    url = 'https://api.trello.com/1/boards/{}/lists?{}&key={}&token={}'.format(get_board_id(),fields,key,token)
+    url = f"https://api.trello.com/1/boards/{get_board_id()}/lists?{fields}&key={key}&token={token}"
     reponse = requests.get(url)
     lists_json = reponse.json()
     return lists_json
@@ -38,7 +38,7 @@ def get_lists():
 def get_items():
     items = []
     fields = 'fields=name,idList,desc,labels'
-    url = 'https://api.trello.com/1/boards/{}/cards?{}&key={}&token={}'.format(get_board_id(),fields,key,token)
+    url = f"https://api.trello.com/1/boards/{get_board_id()}/cards?{fields}&key={key}&token={token}"
     reponse = requests.get(url)
     cards_json = reponse.json()
 
@@ -71,23 +71,20 @@ def get_item(id):
 def add_item(title,description,status):
     for list in get_lists():
         if list.get('name') == status:
-            url = 'https://api.trello.com/1/cards/?idList={}&key={}&token={}'.format(list.get('id'),key,token)
+            url = f"https://api.trello.com/1/cards/?idList={list.get('id')}&key={key}&token={token}"
             payload = {'name':title ,'desc' :description}
             headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
             requests.post(url, data = json.dumps(payload), headers=headers)
-            
-
         
+
 def save_item(item):
     for list in get_lists():
         if list.get('name') == item.get('status'):
             url = f"https://api.trello.com/1/cards/{item.get('id')}?idList={list.get('id')}&key={key}&token={token}"
             requests.put(url)
 
- 
 
 def get_cards():
-    board_id = get_board_id()
-    url = 'https://api.trello.com/1/boards/{}/cards?&key={}&token={}'.format(board_id,key, token)
+    url = f"https://api.trello.com/1/boards/{get_board_id()}/cards?&key={key}&token={token}"
     response = requests.get(url)
     return response.json()
