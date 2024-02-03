@@ -1,7 +1,5 @@
 import requests,os, json
 
-
-
 class Item:
     def __init__(self, id, name, status, desc):
         self.id = id
