@@ -1,6 +1,4 @@
 import requests,os, json
-key = os.getenv('TRELLO_API_KEY') 
-token = os.getenv('TRELLO_API_TOKEN')
 
 
 
@@ -18,7 +16,7 @@ class Item:
 
 def get_board_id():
     fields = 'fields=name'
-    url = f"https://api.trello.com/1/members/me/boards?{fields}&key={key}&token={token}"
+    url = f"https://api.trello.com/1/members/me/boards?{fields}&key={os.getenv('TRELLO_API_KEY')}&token={os.getenv('TRELLO_API_TOKEN')}"
     reponse = requests.get(url)
     boards_json = reponse.json()
 
@@ -29,7 +27,7 @@ def get_board_id():
 
 def get_lists():
     fields = 'fields=name'
-    url = f"https://api.trello.com/1/boards/{get_board_id()}/lists?{fields}&key={key}&token={token}"
+    url = f"https://api.trello.com/1/boards/{get_board_id()}/lists?{fields}&key={os.getenv('TRELLO_API_KEY')}&token={os.getenv('TRELLO_API_TOKEN')}"
     reponse = requests.get(url)
     lists_json = reponse.json()
     return lists_json
@@ -38,7 +36,7 @@ def get_lists():
 def get_items():
     items = []
     fields = 'fields=name,idList,desc,labels'
-    url = f"https://api.trello.com/1/boards/{get_board_id()}/cards?{fields}&key={key}&token={token}"
+    url = f"https://api.trello.com/1/boards/{get_board_id()}/cards?{fields}&key={os.getenv('TRELLO_API_KEY')}&token={os.getenv('TRELLO_API_TOKEN')}"
     reponse = requests.get(url)
     cards_json = reponse.json()
 
@@ -74,7 +72,7 @@ def get_item(id):
 def add_item(title,description,status):
     for list in get_lists():
         if list.get('name') == status:
-            url = f"https://api.trello.com/1/cards/?idList={list.get('id')}&key={key}&token={token}"
+            url = f"https://api.trello.com/1/cards/?idList={list.get('id')}&key={os.getenv('TRELLO_API_KEY')}&token={os.getenv('TRELLO_API_TOKEN')}"
             payload = {'name':title ,'desc' :description}
             headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
             requests.post(url, data = json.dumps(payload), headers=headers)
@@ -83,11 +81,11 @@ def add_item(title,description,status):
 def save_item(item):
     for list in get_lists():
         if list.get('name') == item.get('status'):
-            url = f"https://api.trello.com/1/cards/{item.get('id')}?idList={list.get('id')}&key={key}&token={token}"
+            url = f"https://api.trello.com/1/cards/{item.get('id')}?idList={list.get('id')}&key={os.getenv('TRELLO_API_KEY')}&token={os.getenv('TRELLO_API_TOKEN')}"
             requests.put(url)
 
 
 def get_cards():
-    url = f"https://api.trello.com/1/boards/{get_board_id()}/cards?&key={key}&token={token}"
+    url = f"https://api.trello.com/1/boards/{get_board_id()}/cards?&key={os.getenv('TRELLO_API_KEY')}&token={os.getenv('TRELLO_API_TOKEN')}"
     response = requests.get(url)
     return response.json()
