@@ -4,7 +4,7 @@
 {% block content %}
   <div class="jumbotron">
     <h1 class="display-4 text-center">DevOps Engineering Tasks</h1>
-    <!--<p class="lead text-center">DevOps Engineering Tasks</p> -->
+    
     <br>
     <br>
 
@@ -14,24 +14,18 @@
      <label for="title">Task:</label>
         <input type="text" class="form-control" id="title" placeholder="Type A New Task" name="title">
       </div>
-
       <div class="form-group">
-        <label for="priority">Select Priority</label>
-        <select class="form-control" id="priority" name="priority">
-          <option>P1</option>
-          <option>P2</option>
-          <option>P3</option>
-        </select>
+      <label for="title">Description:</label>
+        <input type="text" class="form-control" id="description" placeholder="Enter Task Description" name="description">
       </div>
 
       <div class="form-group">
         <label for="status">Select Status</label>
         <select class="form-control" id="status" name="status">
-          <option>In Progress</option>
-          <option>Not Started</option>
-          <option>Completed</option>
-          <option>Deferred</option>
-        </select>
+          <option>To Do</option>
+          <option>Doing</option>
+          <option>Done</option>
+         </select>
       </div>
 
       <button type="submit" class="btn btn-primary"> Create A New Task</button>
@@ -40,37 +34,8 @@
     <br>
 
 
-  <h5 class="text-center">Update Task Status</h5> 
-    <form method="post" action="update_task_status">
-      <div class="form-group ">
-     <label for="id">Task ID:</label>
-        <input type="number" class="form-control" id="id" placeholder="Enter Task ID #" name="id">
-      </div>
-
-    <div class="form-group">
-      <label for="status">Select Status</label>
-      <select class="form-control" id="status" name="status">
-        <option>In Progress</option>
-        <option>Not Started</option>
-        <option>Completed</option>
-        <option>Deferred</option>
-      </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Update Task Status</button>
-    </form>
-
-    <br>
-    <br>
-
-     <h5 class="text-center">Delete A Task</h5> 
-    <form method="post" action="delete_task">
-      <div class="form-group">
-        <label for="id">Task ID:</label>
-        <input type="number" class="form-control" id="id" placeholder="Enter Task ID #" name="id" required>
-      </div>
-      <button type="submit" class="btn btn-primary">Delete A Task </button>
-    </form>
-  </div>
+  
+   </div>
 
   <div class="row">
     <div class="col-md-12">
@@ -78,18 +43,51 @@
       <ul>
         <table class="table table-hover text-centered" >
         <tr>
-            <th scope="col">#</th>
+            
             <th scope="col">Status</th>
             <th scope="col">Title</th>
-            <th scope="col">Priority</th>
+            <th scope="col">Description</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
           </tr>
+         
           <tr>
           {% for item in my_items %}
-          <td>{{item.id}}</td>
+          
           <td>{{item.status}}</td>
-          <td>{{item.title}}</td>
-          <td>{{item.priority}}</td>
-          <!--<td><a href="/delete_task/{{item.id}}">View Details</a></td> -->
+          <td>{{item.name}}</td>
+          <td>{{item.desc}}</td>
+          
+          
+          <td>
+            <form method="post" action="update_task_status">
+              <div class="form-group">
+                <input type="text" class="form-control" name="id" value="{{item.id}}" hidden />
+                <input type="text" class="form-control" name="status" value="Done" hidden />
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm ">Done</button>
+            </form>
+          </td>
+          <td>
+            <form method="post" action="update_task_status">
+              <div class="form-group">
+                <input type="text" class="form-control" name="id" value="{{item.id}}" hidden />
+                <input type="text" class="form-control" name="status" value="To Do" hidden />
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm ">To Do</button>
+            </form>
+          </td>
+
+          <td>
+            <form method="post" action="update_task_status">
+              <div class="form-group">
+                <input type="text" class="form-control" name="id" value="{{item.id}}" hidden />
+                <input type="text" class="form-control" name="status" value="Doing" hidden />
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm ">Doing</button>
+            </form>
+          </td>
           </tr>
           {%endfor%}
         </table>
