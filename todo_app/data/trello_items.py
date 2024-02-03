@@ -42,8 +42,11 @@ def get_items():
     reponse = requests.get(url)
     cards_json = reponse.json()
 
+
+    lists = get_lists()
+
     for card in cards_json:
-        for list in get_lists():
+        for list in lists:
             if card.get('idList') == list.get('id'):
                 card.update({'idList':list.get('name')})
                 id = card.get('id')
