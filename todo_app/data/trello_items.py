@@ -9,24 +9,26 @@ class Item:
 
     @classmethod
     def from_trello_card(cls, card, lists):
-        list_name = next((list['name'] for list in lists if list['id'] == card['idList']), None)
-
+        list_name = next((lst['name'] for lst in lists if lst.get('id') == card.get('idList')), None)
         return cls(card['id'], card['name'], list_name, card.get('desc', ''))
 
-def get_board_id():
-    fields = 'fields=name'
-    url = f"https://api.trello.com/1/members/me/boards?{fields}&key={os.getenv('TRELLO_API_KEY')}&token={os.getenv('TRELLO_API_TOKEN')}"
-    reponse = requests.get(url)
-    boards_json = reponse.json()
+# def get_board_id():
+#     fields = 'fields=name'
+#     url = f"https://api.trello.com/1/members/me/boards?{fields}&key={os.getenv('TRELLO_API_KEY')}&token={os.getenv('TRELLO_API_TOKEN')}"
+#     reponse = requests.get(url)
+#     boards_json = reponse.json()
 
-    for board in boards_json:
-        if board.get('name') =='DevOps Engineering':
-            board_id = board.get('id')
-    return board_id
+#     board_id = None
+
+#     for board in boards_json:
+#         if board.get('name') =='DevOps Engineering':
+#             board_id = board.get('id')
+#             break
+#     return board_id
 
 def get_lists():
     fields = 'fields=name'
-    url = f"https://api.trello.com/1/boards/{get_board_id()}/lists?{fields}&key={os.getenv('TRELLO_API_KEY')}&token={os.getenv('TRELLO_API_TOKEN')}"
+    url = f"https://api.trello.com/1/boards/{os.getenv('TRELLO_BOARD_ID')}/lists?{fields}&key={os.getenv('TRELLO_API_KEY')}&token={os.getenv('TRELLO_API_TOKEN')}"
     reponse = requests.get(url)
     lists_json = reponse.json()
     return lists_json
@@ -35,7 +37,7 @@ def get_lists():
 def get_items():
     items = []
     fields = 'fields=name,idList,desc,labels'
-    url = f"https://api.trello.com/1/boards/{get_board_id()}/cards?{fields}&key={os.getenv('TRELLO_API_KEY')}&token={os.getenv('TRELLO_API_TOKEN')}"
+    url = f"https://api.trello.com/1/boards/{os.getenv('TRELLO_BOARD_ID')}/cards?{fields}&key={os.getenv('TRELLO_API_KEY')}&token={os.getenv('TRELLO_API_TOKEN')}"
     reponse = requests.get(url)
     cards_json = reponse.json()
 
@@ -85,6 +87,6 @@ def save_item(item):
 
 
 def get_cards():
-    url = f"https://api.trello.com/1/boards/{get_board_id()}/cards?&key={os.getenv('TRELLO_API_KEY')}&token={os.getenv('TRELLO_API_TOKEN')}"
+    url = f"https://api.trello.com/1/boards/{os.getenv('TRELLO_BOARD_ID')}/cards?&key={os.getenv('TRELLO_API_KEY')}&token={os.getenv('TRELLO_API_TOKEN')}"
     response = requests.get(url)
     return response.json()
