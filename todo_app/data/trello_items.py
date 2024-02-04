@@ -10,6 +10,7 @@ class Item:
     @classmethod
     def from_trello_card(cls, card, lists):
         list_name = next((list['name'] for list in lists if list['id'] == card['idList']), None)
+
         return cls(card['id'], card['name'], list_name, card.get('desc', ''))
 
 def get_board_id():

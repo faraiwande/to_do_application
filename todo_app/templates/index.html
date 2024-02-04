@@ -39,7 +39,7 @@
 
   <div class="row">
     <div class="col-md-12">
-      <h2 class ="text-center">Tasks</h2>
+      <h2 class ="text-center">To Do</h2>
       <ul>
         <table class="table table-hover text-centered" >
         <tr>
@@ -94,6 +94,123 @@
       </ul>
     </div>
 
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class ="text-center">Doing</h2>
+        <ul>
+          <table class="table table-hover text-centered" >
+          <tr>
+              
+              <th scope="col">Status</th>
+              <th scope="col">Title</th>
+              <th scope="col">Description</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+           
+            <tr>
+            {% for item in view_model.doing_items %}
+            
+            <td>{{item.status}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.desc}}</td>
+            
+            
+            <td>
+              <form method="post" action="update_task_status">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="id" value="{{item.id}}" hidden />
+                  <input type="text" class="form-control" name="status" value="Done" hidden />
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm ">Done</button>
+              </form>
+            </td>
+            <td>
+              <form method="post" action="update_task_status">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="id" value="{{item.id}}" hidden />
+                  <input type="text" class="form-control" name="status" value="To Do" hidden />
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm ">To Do</button>
+              </form>
+            </td>
+  
+            <td>
+              <form method="post" action="update_task_status">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="id" value="{{item.id}}" hidden />
+                  <input type="text" class="form-control" name="status" value="Doing" hidden />
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm ">Doing</button>
+              </form>
+            </td>
+            </tr>
+            {%endfor%}
+          </table>
+        </ul>
+      </div>
+
+      
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class ="text-center">Done</h2>
+          <ul>
+            <table class="table table-hover text-centered" >
+            <tr>
+                
+                <th scope="col">Status</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>
+             
+              <tr>
+              {% for item in view_model.done_items %}
+              
+              <td>{{item.status}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.desc}}</td>
+              
+              
+              <td>
+                <form method="post" action="update_task_status">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="id" value="{{item.id}}" hidden />
+                    <input type="text" class="form-control" name="status" value="Done" hidden />
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-sm ">Done</button>
+                </form>
+              </td>
+              <td>
+                <form method="post" action="update_task_status">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="id" value="{{item.id}}" hidden />
+                    <input type="text" class="form-control" name="status" value="To Do" hidden />
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-sm ">To Do</button>
+                </form>
+              </td>
+    
+              <td>
+                <form method="post" action="update_task_status">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="id" value="{{item.id}}" hidden />
+                    <input type="text" class="form-control" name="status" value="Doing" hidden />
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-sm ">Doing</button>
+                </form>
+              </td>
+              </tr>
+              {%endfor%}
+            </table>
+          </ul>
+        </div>
+    
     
  
   </div>
