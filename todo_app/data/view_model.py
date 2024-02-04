@@ -14,6 +14,9 @@ class ViewModel:
                 
         return return_li
 
+    @property
+    def todo_items(self) -> list[Item]:
+        return []
         # @property
         # def items(self):
         #     return  self._items
