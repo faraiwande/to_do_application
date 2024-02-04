@@ -57,4 +57,4 @@ def test_selection_of_doing_items():
     # Assert 
     assert len(returned_items) == 1
     returned_item = returned_items[0]
-    assert returned_item.status =='To Do'
+    assert returned_item.status =='Doing'

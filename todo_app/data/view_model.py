@@ -7,27 +7,26 @@ class ViewModel:
     @property
     def done_items(self) -> list[Item]:
         return_li = []
-        
         for item in self._items:
             if item.status =='Done':
                 return_li.append(item)
-                
         return return_li
 
     @property
     def todo_items(self) -> list[Item]:
         return_li = []
-
         for item in self._items:
             if item.status =='To Do':
                 return_li.append(item)
-
-
         return return_li
     
     @property
     def doing_items(self) -> list[Item]:
-        return []
+        return_li = []
+        for item in self._items:
+            if item.status =='Doing':
+                return_li.append(item)
+        return return_li
 
        
         
