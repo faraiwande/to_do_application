@@ -1,7 +1,7 @@
 from todo_app.data.view_model import ViewModel
 from todo_app.data.view_model import Item
 
-def test_demo_test():
+def test_selection_of_done_items():
     # Arrange
     items = [ 
         Item(1,'Build Unit Tests','Done','done items needs doing'),
@@ -11,9 +11,8 @@ def test_demo_test():
     view_model = ViewModel(items)
 
 
-
     # Act  
-    returned_items = view_model._items
+    returned_items = view_model.done_items
 
 
     # Assert 
