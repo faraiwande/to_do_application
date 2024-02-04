@@ -34,6 +34,17 @@ $ cp .env.template .env  # (first time only)
 
 The `.env` file is used by flask to set environment variables when running `flask run`. This enables things like development mode (which also enables features like hot reloading when you make a file change). There's also a [SECRET_KEY](https://flask.palletsprojects.com/en/1.1.x/config/#SECRET_KEY) variable which is used to encrypt the flask session cookie.
 
+
+
+You'll need to install pytest which is a dependecy that we will use to run "Automated Testing"
+
+
+```bash
+$ poetry add  pytest # 
+```
+
+Execute the command above & it should download pytest & also update the pyproject.toml as well.
+
 ## Running the App
 
 Once the all dependencies have been installed, start the Flask app in development mode within the Poetry environment by running:
@@ -61,3 +72,7 @@ You need to create an account in Trello & obtained a TRELLO_API_KEY & TRELLO_API
 - SIGN UP https://trello.com/signup
 
 - AUTH https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/#managing-your-api-key
+
+
+## Testing 
+You need to add pytest to poetry as this will be 
