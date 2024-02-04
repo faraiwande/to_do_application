@@ -36,7 +36,7 @@ The `.env` file is used by flask to set environment variables when running `flas
 
 
 
-You'll need to install pytest which is a dependecy that we will use to run "Automated Testing"
+You'll need to install pytest which is a dependecy that we will use to run the testing suite
 
 
 ```bash
