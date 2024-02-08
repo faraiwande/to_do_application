@@ -55,3 +55,5 @@ def stub(url, params=None):
             'desc': 'Test card description'
         }]
         return StubResponse(fake_response_data)
+    
+    raise Exception(f'Integration test did not expect URL "{url}"')
