@@ -2,3 +2,7 @@
   hosts: webservers
   remote_user: ec2-user
   tasks:
+  - name: Install te latest version of Git
+    ansible.builtin.yum:
+      name: git
+      state: latest
