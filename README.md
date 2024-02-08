@@ -74,5 +74,10 @@ You need to create an account in Trello & obtained a TRELLO_API_KEY & TRELLO_API
 - AUTH https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/#managing-your-api-key
 
 
-## Testing 
-You need to add pytest to poetry as this will be 
+## Ansible for Deployment of Application
+You will need to deploy the application using Ansible you need to copy the `ansible` folder to the Host Node. Update the inventory file with the control nodes you want to deploy to & then run the following command:
+
+```bash
+ansible-playbook playbook.yaml -i inventory.yaml
+```
+> You must setup passwordless SSH Access from the Host to your Control Nodes
