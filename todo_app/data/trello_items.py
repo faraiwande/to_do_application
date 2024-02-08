@@ -12,20 +12,6 @@ class Item:
         list_name = next((lst['name'] for lst in lists if lst.get('id') == card.get('idList')), None)
         return cls(card['id'], card['name'], list_name, card.get('desc', ''))
 
-# def get_board_id():
-#     fields = 'fields=name'
-#     url = f"https://api.trello.com/1/members/me/boards?{fields}&key={os.getenv('TRELLO_API_KEY')}&token={os.getenv('TRELLO_API_TOKEN')}"
-#     reponse = requests.get(url)
-#     boards_json = reponse.json()
-
-#     board_id = None
-
-#     for board in boards_json:
-#         if board.get('name') =='DevOps Engineering':
-#             board_id = board.get('id')
-#             break
-#     return board_id
-
 def get_lists():
     fields = 'fields=name'
     url = f"https://api.trello.com/1/boards/{os.getenv('TRELLO_BOARD_ID')}/lists?{fields}&key={os.getenv('TRELLO_API_KEY')}&token={os.getenv('TRELLO_API_TOKEN')}"
