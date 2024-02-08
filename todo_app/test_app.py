@@ -24,7 +24,7 @@ def test_index_page(monkeypatch, client):
     response = client.get('/')
 
     assert response.status_code == 200
-    assert 'To Do' in response.data.decode()
+    assert 'Test card description' in response.data.decode()
 
 class StubResponse():
     def __init__(self, fake_response_data):
@@ -40,12 +40,18 @@ def stub(url, params=None):
     if params is None:
         params = {}
 
-    if url.startswith('https://api.trello.com/1/boards/') or 'lists' in url or 'cards' in url:
+    test_board_id = os.getenv("TRELLO_BOARD_ID")
+    if url.startswith(f'https://api.trello.com/1/boards/{test_board_id}/lists'):
         fake_response_data = [{
             'id': '123abc',
             'name': 'To Do',
+        }]
+        return StubResponse(fake_response_data)
+    elif url.startswith(f'https://api.trello.com/1/boards/{test_board_id}/cards'):
+        fake_response_data = [{
+            'id': '123abc-card',
+            'name': 'To Do 2',
+            'idList': '123abc',
             'desc': 'Test card description'
         }]
         return StubResponse(fake_response_data)
-
-    raise Exception(f'Integration test did not expect URL "{url}"')

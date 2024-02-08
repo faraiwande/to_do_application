@@ -7,7 +7,7 @@ class Item:
         self.status = status
         self.desc = desc 
 
-    @classmethod
+    @classmethod 
     def from_trello_card(cls, card, lists):
         list_name = next((lst['name'] for lst in lists if lst.get('id') == card.get('idList')), None)
         return cls(card['id'], card['name'], list_name, card.get('desc', ''))
