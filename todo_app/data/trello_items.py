@@ -1,12 +1,4 @@
 import requests,os, json
-from dotenv import load_dotenv, find_dotenv
-
-load_dotenv(find_dotenv())
-
-key = os.getenv('TRELLO_API_KEY') 
-token = os.getenv('TRELLO_API_TOKEN')
-
-
 
 class Item:
     def __init__(self, id, name, status, desc):
@@ -15,25 +7,14 @@ class Item:
         self.status = status
         self.desc = desc 
 
-    @classmethod
+    @classmethod 
     def from_trello_card(cls, card, lists):
-        list_name = next((list['name'] for list in lists if list['id'] == card['idList']), None)
+        list_name = next((lst['name'] for lst in lists if lst.get('id') == card.get('idList')), None)
         return cls(card['id'], card['name'], list_name, card.get('desc', ''))
-
-def get_board_id():
-    fields = 'fields=name'
-    url = 'https://api.trello.com/1/members/me/boards?{}&key={}&token={}'.format(fields,key,token)
-    reponse = requests.get(url)
-    boards_json = reponse.json()
-
-    for board in boards_json:
-        if board.get('name') =='DevOps Engineering':
-            board_id = board.get('id')
-    return board_id
 
 def get_lists():
     fields = 'fields=name'
-    url = 'https://api.trello.com/1/boards/{}/lists?{}&key={}&token={}'.format(get_board_id(),fields,key,token)
+    url = f"https://api.trello.com/1/boards/{os.getenv('TRELLO_BOARD_ID')}/lists?{fields}&key={os.getenv('TRELLO_API_KEY')}&token={os.getenv('TRELLO_API_TOKEN')}"
     reponse = requests.get(url)
     lists_json = reponse.json()
     return lists_json
@@ -42,12 +23,15 @@ def get_lists():
 def get_items():
     items = []
     fields = 'fields=name,idList,desc,labels'
-    url = 'https://api.trello.com/1/boards/{}/cards?{}&key={}&token={}'.format(get_board_id(),fields,key,token)
+    url = f"https://api.trello.com/1/boards/{os.getenv('TRELLO_BOARD_ID')}/cards?{fields}&key={os.getenv('TRELLO_API_KEY')}&token={os.getenv('TRELLO_API_TOKEN')}"
     reponse = requests.get(url)
     cards_json = reponse.json()
 
+
+    lists = get_lists()
+
     for card in cards_json:
-        for list in get_lists():
+        for list in lists:
             if card.get('idList') == list.get('id'):
                 card.update({'idList':list.get('name')})
                 id = card.get('id')
@@ -75,21 +59,20 @@ def get_item(id):
 def add_item(title,description,status):
     for list in get_lists():
         if list.get('name') == status:
-            url = 'https://api.trello.com/1/cards/?idList={}&key={}&token={}'.format(list.get('id'),key,token)
+            url = f"https://api.trello.com/1/cards/?idList={list.get('id')}&key={os.getenv('TRELLO_API_KEY')}&token={os.getenv('TRELLO_API_TOKEN')}"
             payload = {'name':title ,'desc' :description}
             headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
             requests.post(url, data = json.dumps(payload), headers=headers)
-            
-
         
+
 def save_item(item):
     for list in get_lists():
         if list.get('name') == item.get('status'):
-            url = f'https://api.trello.com/1/cards/{item.get('id')}?idList={list.get('id')}&key={key}&token={token}'
+            url = f"https://api.trello.com/1/cards/{item.get('id')}?idList={list.get('id')}&key={os.getenv('TRELLO_API_KEY')}&token={os.getenv('TRELLO_API_TOKEN')}"
             requests.put(url)
 
+
 def get_cards():
-    board_id = get_board_id()
-    url = 'https://api.trello.com/1/boards/{}/cards?&key={}&token={}'.format(board_id,key, token)
+    url = f"https://api.trello.com/1/boards/{os.getenv('TRELLO_BOARD_ID')}/cards?&key={os.getenv('TRELLO_API_KEY')}&token={os.getenv('TRELLO_API_TOKEN')}"
     response = requests.get(url)
     return response.json()
