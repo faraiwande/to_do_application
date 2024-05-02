@@ -1,0 +1,8 @@
+FROM python:3.10.12
+RUN curl -sSL https://install.python-poetry.org | python - 
+ENV PATH=$PATH:/root/.local/bin/
+COPY . /app
+WORKDIR /app
+RUN poetry install
+ENTRYPOINT poetry run flask run
+
