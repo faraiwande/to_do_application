@@ -1,0 +1,14 @@
+FROM python:3.10.12 AS BASE
+RUN curl -sSL https://install.python-poetry.org | python - 
+ENV PATH=$PATH:/root/.local/bin/
+COPY pyproject.toml poetry.toml /app/
+WORKDIR /app
+RUN poetry install
+COPY . /app
+FROM  base AS prod
+ENV FLASK_DEBUG=false
+ENTRYPOINT poetry run flask run --host 0.0.0.0
+
+FROM base AS dev
+ENV FLASK_DEBUG=true
+ENTRYPOINT poetry run flask run --host 0.0.0.0

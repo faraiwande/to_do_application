@@ -81,3 +81,24 @@ You will need to deploy the application using Ansible you need to copy the `ansi
 ansible-playbook playbook.yaml -i inventory.yaml
 ```
 > You must setup passwordless SSH Access from the Host to your Control Nodes
+
+## Building & Running the App via Docker
+To build the container for local development, please run 
+```bash
+docker build --target dev --tag todo_app:dev -f dockerfiles/Dockerfile.todo_app .
+```
+
+## To run the container for local development, please run
+```bash
+docker run --env-file ./.env -p 5100:5000 --mount "type=bind,source=$(pwd)/todo_app,target=/app/todo_app" -it todo_app:dev
+```
+
+## The build & run commands for prod are : 
+```bash
+
+docker build --target prod --tag todo_app:prod -f dockerfiles/Dockerfile.todo_app .
+
+docker run --publish 8000:5000 -it --env-file .env todo_app:prod 
+
+
+```
