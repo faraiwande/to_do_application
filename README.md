@@ -81,3 +81,7 @@ You will need to deploy the application using Ansible you need to copy the `ansi
 ansible-playbook playbook.yaml -i inventory.yaml
 ```
 > You must setup passwordless SSH Access from the Host to your Control Nodes
+
+
+## Architecture Diagrams
+Diagrams are in the in the '`diagrams` subfolder. You can use the `.drawoi` file to edit the diagrams, which were built using [app.diagrams.net](aoo.diagrams.net).
