@@ -84,4 +84,4 @@ ansible-playbook playbook.yaml -i inventory.yaml
 
 
 ## Architecture Diagrams
-Diagrams are in the in the '`diagrams` subfolder. You can use the `.drawoi` file to edit the diagrams, which were built using [app.diagrams.net](aoo.diagrams.net).
+Diagrams are in the in the '`diagrams` subfolder. You can use the `.drawoi` file to edit the diagrams, which were built using [app.diagrams.net](app.diagrams.net).
