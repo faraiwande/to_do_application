@@ -100,5 +100,14 @@ docker build --target prod --tag todo_app:prod -f dockerfiles/Dockerfile.todo_ap
 
 docker run --publish 8000:5000 -it --env-file .env todo_app:prod 
 
+```
+
+## Execution of Test Suite in Docker run the following: 
+
+```bash
+docker build --target test --tag todo_app:test -f dockerfiles/Dockerfile.todo_app .
+
+docker run todo_app:test
 
 ```
+
