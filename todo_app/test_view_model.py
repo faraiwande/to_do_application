@@ -16,7 +16,7 @@ def test_selection_of_done_items():
 
 
     # Assert 
-    assert len(returned_items) == 1
+    assert len(returned_items)  1
     returned_item = returned_items[0]
     assert returned_item.status =='Done'
 
