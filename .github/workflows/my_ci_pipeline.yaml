@@ -6,9 +6,6 @@ on:
   pull_request:
     paths-ignore:
       - 'README.md'
-
-[push]
-
 jobs:
   build:
     name: Build and test
