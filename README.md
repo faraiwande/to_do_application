@@ -115,4 +115,19 @@ docker build --target dev --tag todo_app:dev -f dockerfiles/Dockerfile.todo_app 
 Diagrams are in the in the '`diagrams` subfolder. You can use the `.drawoi` file to edit the diagrams, which were built using [app.diagrams.net](app.diagrams.net).
 
 
+## Hosting on Azure 
+The image that is deployed to Azure is hosted on Docker Hub at https://hub.docker.com/r/fwande/todo_app & the app is hosted at https://fwtodoapp.azurewebsites.net/. 
+
+To update the app you need to run the following commands: 
+
+1. Build The Application 
+```bash
+    docker build --target prod --tag fwande/todo_app:prod -f dockerfiles/Dockerfile.todo_app .
+```
+2. Push The Application 
+```bash
+     docker push fwande/todo_app:prod
+```
+3. Then trigger Azure to pull the updated image from Dock by making a post request to the webhook link which you can find on the App Service on the Deployment Centre Tab. 
+    
 
