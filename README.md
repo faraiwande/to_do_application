@@ -95,14 +95,22 @@ docker build --target prod --tag todo_app:prod -f dockerfiles/Dockerfile.todo_ap
 
 docker run --publish 8000:5000 -it --env-file .env todo_app:prod 
 
+```
+## Execution of Test Suite in Docker run the following: 
+
+```bash
+docker build --target test --tag todo_app:test -f dockerfiles/Dockerfile.todo_app .
+
+docker run todo_app:test
 
 ```
-
-## Architecture Diagrams
-Diagrams are in the in the '`diagrams` subfolder. You can use the `.drawoi` file to edit the diagrams, which were built using [app.diagrams.net](app.diagrams.net).
-=======
 ## Building & Running the App via Docker
 To build the container for local development, please run 
 ```bash
 docker build --target dev --tag todo_app:dev -f dockerfiles/Dockerfile.todo_app .
-```
+
+## Architecture Diagrams
+Diagrams are in the in the '`diagrams` subfolder. You can use the `.drawoi` file to edit the diagrams, which were built using [app.diagrams.net](app.diagrams.net).
+=======
+
+
