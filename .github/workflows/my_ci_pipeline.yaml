@@ -28,3 +28,5 @@ jobs:
          with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+       - run: docker build --target prod --tag fwande/todo_app:prod -f dockerfiles/Dockerfile.todo_app .
+       - run: docker push fwande/todo_app:prod
