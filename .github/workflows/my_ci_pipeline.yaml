@@ -30,6 +30,6 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
        - run: docker build --target prod --tag fwande/todo_app:prod -f dockerfiles/Dockerfile.todo_app .
        - run: docker push fwande/todo_app:prod
-       - run: curl -dH -X POST ${{ secrets.PP_SERVICE_DEPLOYMENT_WEBHOOK }}
+       - run: curl -dH -X POST '${{ secrets.PP_SERVICE_DEPLOYMENT_WEBHOOK }}'
       
        
