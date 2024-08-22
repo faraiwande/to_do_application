@@ -131,3 +131,13 @@ To update the app you need to run the following commands:
 3. Then trigger Azure to pull the updated image from Dock by making a post request to the webhook link which you can find on the App Service on the Deployment Centre Tab. 
     
 
+## Automate Azure Deployment
+
+To automatically deploy the application to Azure you will need to your Docker Credentials & the webhook link of your App Service as Secrets in your repository. 
+
+Docker 
+```bash
+${{ secrets.DOCKER_HUB_USERNAME }}
+${{ secrets.DOCKER_HUB_PASSWORD }}
+${{ secrets.APP_SERVICE_DEPLOYMENT_WEBHOOK }}
+```
