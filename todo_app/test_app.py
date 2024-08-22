@@ -16,7 +16,7 @@ def client():
             yield client
 
 def test_index_page(client):
-    pymongo_client = mongomock.MongoClient(os.get("MONGODB_CONNECTIONSTRING"))
+    pymongo_client = mongomock.MongoClient(os.getenv("MONGODB_CONNECTIONSTRING"))
     
     db = pymongo_client[os.getenv("MONGODB_COLLECTION_NAME")]
     collection = db[os.getenv("MONGODB_COLLECTION_NAME")]
