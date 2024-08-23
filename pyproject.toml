@@ -12,6 +12,7 @@ requests = "^2.31.0"
 pytest = "^8.0.0"
 gunicorn = "^21.2.0"
 safety = "^3.2.6"
+flask-dance = "^7.1.0"
 
 [tool.poetry.dev-dependencies]
 
