@@ -65,14 +65,10 @@ You should see output similar to the following:
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
 
 
-## Connecting To Trello
+## Connecting To Mongo DB Database
 
-You need to create an account in Trello & obtained a TRELLO_API_KEY & TRELLO_API_TOKEN. 
-
-- SIGN UP https://trello.com/signup
-
-- AUTH https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/#managing-your-api-key
-
+* Setup a Mongo DB Account & Database 
+* Provide a connection string to connect to the Database  
 
 ## Ansible for Deployment of Application
 You will need to deploy the application using Ansible you need to copy the `ansible` folder to the Host Node. Update the inventory file with the control nodes you want to deploy to & then run the following command:
