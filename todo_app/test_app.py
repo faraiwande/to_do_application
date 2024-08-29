@@ -17,7 +17,6 @@ def client():
 
 def test_index_page(client):
     pymongo_client = mongomock.MongoClient(os.getenv("MONGODB_CONNECTIONSTRING"))
-    
     db = pymongo_client[os.getenv("MONGODB_COLLECTION_NAME")]
     collection = db[os.getenv("MONGODB_COLLECTION_NAME")]
     
@@ -32,3 +31,4 @@ def test_index_page(client):
     response = client.get('/')  
     
     assert response.status_code == 200
+    assert 'T' in response.data.decode()
