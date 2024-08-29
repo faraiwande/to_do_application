@@ -137,3 +137,17 @@ ${{ secrets.DOCKER_HUB_USERNAME }}
 ${{ secrets.DOCKER_HUB_PASSWORD }}
 ${{ secrets.APP_SERVICE_DEPLOYMENT_WEBHOOK }}
 ```
+## Encryption At Rest
+Azure Cosmos DB is a Paas as a result all data that is stored in Azure Cosmos DB is encrpted at rest & in transport hence no action is needed as the encryption at rest is "on" by default. If you need more information about this works please follow the link below : 
+
+https://learn.microsoft.com/en-us/azure/cosmos-db/database-encryption-at-rest
+
+## Encryption In Transit
+The application has been setup so that it only ever accepts HTTPS & which is also true for the database as shown by the change in the connection string & networking settings. 
+
+![alt text](image-1.png)
+
+![alt text](image-2.png)
+
+![alt text](image-3.png)
+
