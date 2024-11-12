@@ -5,6 +5,13 @@ terraform {
       version = ">= 3.8"
     }
   }
+
+  backend "azurerm" {
+    resource_group_name  = "Cohort30_FarWan_ProjectExercise"
+    storage_account_name = "todotfstateacc"
+    container_name       = "tfstatestore"
+    key                  = "terraform.tfstate"
+  }
 }
 
 provider "azurerm" {
@@ -110,3 +117,6 @@ resource "azurerm_cosmosdb_mongo_collection" "db" {
     unique = true
   }
 }
+
+
+

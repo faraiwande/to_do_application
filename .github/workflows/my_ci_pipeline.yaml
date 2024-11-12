@@ -7,6 +7,12 @@ on:
     paths-ignore:
       - 'README.md'
 jobs:
+  Terraform:
+    name: Checking Terraform
+    runs-on: ubuntu-latest
+    steps:
+    - run: Terraform init
+
   build:
     name: Build and Test
     runs-on: ubuntu-latest

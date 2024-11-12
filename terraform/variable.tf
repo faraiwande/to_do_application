@@ -29,23 +29,33 @@ variable "MONGODB_NAME" {
 }
 
 variable "SUBSCRIPTION_ID" {
-  type = string
+  type      = string
   sensitive = true
 
 }
 
 variable "RESOURCE_GROUP_NAME" {
-  type = string
+  type      = string
   sensitive = true
 
 }
 
 variable "COSMOSDB_ACCOUNT" {
-    type = string
-  
+  type = string
+
 }
 
 variable "DOCKER_IMAGE_NAME" {
-    type = string
-  
+  type = string
+
+}
+
+variable "STORAGE_ACCOUNT_NAME" {
+  type = string
+
+}
+
+variable "CONTAINER_NAME" {
+  type = string
+
 }
