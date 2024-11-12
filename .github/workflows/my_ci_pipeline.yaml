@@ -7,12 +7,6 @@ on:
     paths-ignore:
       - 'README.md'
 jobs:
-  Terraform:
-    name: Checking Terraform
-    runs-on: ubuntu-latest
-    steps:
-    - run: Terraform init
-
   build:
     name: Build and Test
     runs-on: ubuntu-latest
@@ -30,7 +24,6 @@ jobs:
     if: ${{github.event_name=='push' && github.ref=='refs/heads/main'}}
     steps:
        - uses: actions/checkout@v2
-       - run: echo hello deploy
        - name: Login to Docker Hub
          uses: docker/login-action@v3
          with:
@@ -38,6 +31,27 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
        - run: docker build --target prod --tag fwande/todo_app:prod -f dockerfiles/Dockerfile.todo_app .
        - run: docker push fwande/todo_app:prod
-       - run: curl -dH -X POST '${{ secrets.APP_SERVICE_DEPLOYMENT_WEBHOOK }}'
-      
-       
+
+    
+       - name: Initialise Terraform
+         env: 
+            TF_VAR_COSMOSDB_ACCOUNT: ${{ secrets.TF_VAR_COSMOSDB_ACCOUNT }}
+            TF_VAR_DOCKER_IMAGE_NAME: ${{ secrets.TF_VAR_DOCKER_IMAGE_NAME }}
+            TF_VAR_FLASK_APP: ${{ secrets.TF_VAR_FLASK_APP }}
+            TF_VAR_FLASK_DEBUG: ${{ secrets.TF_VAR_FLASK_DEBUG }}
+            TF_VAR_MONGODB_COLLECTION_NAME: ${{ secrets.TF_VAR_MONGODB_COLLECTION_NAME }}
+            TF_VAR_MONGODB_NAME: ${{ secrets.TF_VAR_MONGODB_NAME }}
+            TF_VAR_RESOURCE_GROUP_NAME: ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}
+            TF_VAR_SECRET_KEY: ${{ secrets.TF_VAR_SECRET_KEY }}
+            TF_VAR_SUBSCRIPTION_ID: ${{ secrets.TF_VAR_SUBSCRIPTION_ID }}
+            TF_VAR_WEBSITES_PORT: ${{ secrets.TF_VAR_WEBSITES_PORT }}
+         run: terraform init | terraform apply -auto-approve | curl -dH -X POST "$(terraform output -raw cd_webhook)"
+         
+     
+    
+
+
+ 
+
+
+     
