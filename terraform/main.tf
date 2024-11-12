@@ -33,7 +33,7 @@ resource "azurerm_linux_web_app" "main" {
 
   site_config {
     application_stack {
-      docker_image_name   = "appsvcsample/python-helloworld:latest"
+      docker_image_name   = var.DOCKER_IMAGE_NAME
       docker_registry_url = "https://index.docker.io"
 
     }
@@ -104,8 +104,6 @@ resource "azurerm_cosmosdb_mongo_collection" "db" {
   account_name        = data.azurerm_cosmosdb_account.db.name
   database_name       = azurerm_cosmosdb_mongo_database.db.name
 
-  default_ttl_seconds = "777"
-  shard_key           = "uniqueKey"
 
   index {
     keys   = ["_id"]

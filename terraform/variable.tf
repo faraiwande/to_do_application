@@ -44,3 +44,8 @@ variable "COSMOSDB_ACCOUNT" {
     type = string
   
 }
+
+variable "DOCKER_IMAGE_NAME" {
+    type = string
+  
+}
