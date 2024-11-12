@@ -34,6 +34,7 @@ jobs:
 
     
        - name: Initialise Terraform
+         working-directory: terraform  
          env: 
             TF_VAR_COSMOSDB_ACCOUNT: ${{ secrets.TF_VAR_COSMOSDB_ACCOUNT }}
             TF_VAR_DOCKER_IMAGE_NAME: ${{ secrets.TF_VAR_DOCKER_IMAGE_NAME }}
@@ -45,7 +46,7 @@ jobs:
             TF_VAR_SECRET_KEY: ${{ secrets.TF_VAR_SECRET_KEY }}
             TF_VAR_SUBSCRIPTION_ID: ${{ secrets.TF_VAR_SUBSCRIPTION_ID }}
             TF_VAR_WEBSITES_PORT: ${{ secrets.TF_VAR_WEBSITES_PORT }}
-         run: cd terraform | ls 
+         run: terraform init | terraform apply -auto-approve | curl -dH -X POST "$(terraform output -raw cd_webhook)"
          
      
     
