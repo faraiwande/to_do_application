@@ -8,6 +8,7 @@ variable "FLASK_DEBUG" {
 
 variable "WEBSITES_ENABLE_APP_SERVICE_STORAGE" {
   type = string
+  default = "false"
 }
 
 variable "SECRET_KEY" {
