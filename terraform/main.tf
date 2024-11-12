@@ -107,8 +107,8 @@ resource "azurerm_cosmosdb_mongo_database" "db" {
 
 resource "azurerm_cosmosdb_mongo_collection" "db" {
   name                = var.MONGODB_COLLECTION_NAME
-  resource_group_name = data.azurerm_cosmosdb_account.db.resource_group_name
-  account_name        = data.azurerm_cosmosdb_account.db.name
+  resource_group_name = azurerm_cosmosdb_account.db.resource_group_name
+  account_name        = azurerm_cosmosdb_account.db.name
   database_name       = azurerm_cosmosdb_mongo_database.db.name
 
 
