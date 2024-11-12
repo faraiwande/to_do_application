@@ -45,7 +45,7 @@ jobs:
             TF_VAR_SECRET_KEY: ${{ secrets.TF_VAR_SECRET_KEY }}
             TF_VAR_SUBSCRIPTION_ID: ${{ secrets.TF_VAR_SUBSCRIPTION_ID }}
             TF_VAR_WEBSITES_PORT: ${{ secrets.TF_VAR_WEBSITES_PORT }}
-         run: terraform init | terraform apply -auto-approve | curl -dH -X POST "$(terraform output -raw cd_webhook)"
+         run: cd terraform | terraform init | terraform apply -auto-approve | curl -dH -X POST "$(terraform output -raw cd_webhook)"
          
      
     
