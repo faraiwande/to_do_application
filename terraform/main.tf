@@ -93,30 +93,30 @@ resource "azurerm_cosmosdb_account" "main" {
 
 }
 
-data "azurerm_cosmosdb_account" "db" {
-  name                = var.COSMOSDB_ACCOUNT
-  resource_group_name = var.RESOURCE_GROUP_NAME
-}
+# data "azurerm_cosmosdb_account" "db" {
+#   name                = var.COSMOSDB_ACCOUNT
+#   resource_group_name = var.RESOURCE_GROUP_NAME
+# }
 
-resource "azurerm_cosmosdb_mongo_database" "db" {
-  name                = var.MONGODB_NAME
-  resource_group_name = data.azurerm_cosmosdb_account.db.resource_group_name
-  account_name        = data.azurerm_cosmosdb_account.db.name
+# resource "azurerm_cosmosdb_mongo_database" "db" {
+#   name                = var.MONGODB_NAME
+#   resource_group_name = data.azurerm_cosmosdb_account.db.resource_group_name
+#   account_name        = data.azurerm_cosmosdb_account.db.name
 
-}
+# }
 
-resource "azurerm_cosmosdb_mongo_collection" "db" {
-  name                = var.MONGODB_COLLECTION_NAME
-  resource_group_name = data.azurerm_cosmosdb_account.db.resource_group_name
-  account_name        = data.azurerm_cosmosdb_account.db.name
-  database_name       = azurerm_cosmosdb_mongo_database.db.name
+# resource "azurerm_cosmosdb_mongo_collection" "db" {
+#   name                = var.MONGODB_COLLECTION_NAME
+#   resource_group_name = data.azurerm_cosmosdb_account.db.resource_group_name
+#   account_name        = data.azurerm_cosmosdb_account.db.name
+#   database_name       = azurerm_cosmosdb_mongo_database.db.name
 
 
-  index {
-    keys   = ["_id"]
-    unique = true
-  }
-}
+#   index {
+#     keys   = ["_id"]
+#     unique = true
+#   }
+# }
 
 
 
