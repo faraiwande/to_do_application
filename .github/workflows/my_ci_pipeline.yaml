@@ -72,10 +72,9 @@ jobs:
             ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
             ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}            
 
-         run: terraform apply -auto-approve 
+         run: terraform apply -auto-approve | curl -dH -X POST "$(terraform output -raw cd_webhook)"
 
-       - name: Deploy To Azure 
-         run: curl -dH -X POST "$(terraform output -raw cd_webhook)"
+  
         
      
     
