@@ -78,7 +78,7 @@ resource "azurerm_cosmosdb_account" "main" {
     name = "EnableServerless"
   }
 
-  
+  lifecycle { prevent_destroy = true }
 
   consistency_policy {
     consistency_level       = "BoundedStaleness"
