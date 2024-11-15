@@ -73,7 +73,7 @@ jobs:
             ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}            
          run: |
            terraform apply -auto-approve
-           # curl -dH -X POST "$(terraform output -raw cd_webhook)"
+           curl -dH -X POST "$(terraform output -raw cd_webhook)"
 
   
         
