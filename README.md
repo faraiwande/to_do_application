@@ -151,3 +151,22 @@ The application has been setup so that it only ever accepts HTTPS & which is als
 
 ![alt text](image-3.png)
 
+
+## IAC 
+The main.tf, outputs.tf & variable.tf contains the code, variables & outputs required for having the todoapp as IAC. 
+
+If you are using GitHub Actions you will need to set up Service Principal Authentication. 
+
+ - "appId": ARM_CLIENT_ID
+ - "password": ARM_CLIENT_SECRET
+ - "tenant": ARM_TENANT_ID
+ - ""Subcription Id" : ARM_SUBSCRIPTION_ID
+
+Once you have these you need to add them as repository secrets & ensure that when adding terraform variables you add the prefix TF_VAR_ and when GitHub Actions executes it ignores the prefix. 
+
+TF_VAR_"variable_name"
+```bash
+TF_VAR_FLASK_DEBUG: ${{ secrets.TF_VAR_FLASK_DEBUG }}
+```
+
+![alt text](image-5.png)
